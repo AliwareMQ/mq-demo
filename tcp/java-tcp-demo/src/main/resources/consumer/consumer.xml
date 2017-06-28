@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="consumer" class="com.aliyun.openservices.ons.api.bean.ConsumerBean"
+          init-method="start" destroy-method="shutdown">
+        <property name="properties">
+            <map>
+                <entry key="ConsumerId" value="XXX"/> <!-- CID,请替换 -->
+                <entry key="AccessKey" value="XXX"/> <!-- ACCESS_KEY,请替换 -->
+                <entry key="SecretKey" value="XXX"/><!-- SECRET_KEY,请替换 -->
+                <!--PropertyKeyConst.ONSAddr 请根据不同Region进行配置
+                  公网测试: http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet
+                  公有云生产: http://onsaddr-internal.aliyun.com:8080/rocketmq/nsaddr4client-internal
+                  杭州金融云: http://jbponsaddr-internal.aliyun.com:8080/rocketmq/nsaddr4client-internal
+                  深圳金融云: http://mq4finance-sz.addr.aliyun.com:8080/rocketmq/nsaddr4client-internal -->
+                <entry key="ONSAddr" value="http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet"/>
+            </map>
+        </property>
+
+        <property name="subscriptionTable">
+            <map>
+                <entry value-ref="messageListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="XXX"/> <!-- Topic,请替换 -->
+                            <property name="expression" value="*"/><!-- MessageType名: 多个messageType 用 “||”分割 -->
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+
+        </property>
+    </bean>
+
+    <!-- 消息处理器 -->
+    <bean id="messageListener" class="com.alibaba.ons.message.example.consumer.MessageListenerImpl"/>
+</beans>

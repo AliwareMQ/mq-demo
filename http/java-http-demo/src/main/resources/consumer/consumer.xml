@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="consumer" class="com.alibaba.ons.message.example.consumer.HttpMQConsumer">
+		<!-- URL,请替换 -->
+		<property name="url" value="http://domain/message" />
+
+		<!-- 阿里云身份验证码,请替换 -->
+		<property name="accessKey" value="XXXXXX" />
+
+		<!-- 阿里云身份验证密钥,请替换 -->
+		<property name="secretKey" value="XXXXXX" />
+
+		<!-- MQ控制台创建的Topic,请替换 -->
+		<property name="topic" value="XXXXXX" />
+
+		<!-- MQ控制台创建的Consumer ID,请替换 -->
+		<property name="consumerId" value="XXXXXX" />
+	</bean>
+</beans>
