@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="producer" class="com.alibaba.ons.message.example.producer.HttpMQProducer">
+	<bean id="producer" class="com.aliyun.openservices.http.example.producer.HttpMQProducer">
 		<!-- URL,请替换http://publictest-rest.ons.aliyun.com/message -->
 		<property name="url" value="http://domain/message" />
 

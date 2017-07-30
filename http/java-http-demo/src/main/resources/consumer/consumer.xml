@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="consumer" class="com.alibaba.ons.message.example.consumer.HttpMQConsumer">
+	<bean id="consumer" class="com.aliyun.openservices.http.example.consumer.HttpMQConsumer">
 		<!-- URL,请替换 -->
 		<property name="url" value="http://domain/message" />
 
