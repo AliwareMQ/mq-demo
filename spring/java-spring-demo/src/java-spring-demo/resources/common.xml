@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder properties-ref="commonProperties"/>
+    <bean id="commonProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="AccessKey">XXX</prop> <!-- 使用前请修改这些资源信息 -->
+                <prop key="SecretKey">XXX</prop>
+                <prop key="ConsumerId">XXX</prop>
+                <prop key="ProducerId">XXX</prop>
+                <prop key="Topic">XXX</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

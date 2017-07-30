@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="common.xml"/>
+    <bean id="msgListener" class="com.aliyun.openservices.spring.example.order.OrderDemoMessageListener"/> <!--顺序消息监听器配置-->
+
+    <bean id="consumer" class="com.aliyun.openservices.ons.api.bean.OrderConsumerBean" init-method="start"
+          destroy-method="shutdown">
+        <property name="properties"> <!--消费者配置信息-->
+            <props>
+                <prop key="ConsumerId">${ConsumerId}</prop> <!--请替换为自己的账户信息-->
+                <prop key="AccessKey">${AccessKey}</prop>
+                <prop key="SecretKey">${SecretKey}</prop>
+                <!--将消费者线程数固定为50个
+                 <prop key="ConsumeThreadNums">50</prop>
+                -->
+            </props>
+        </property>
+        <property name="subscriptionTable">
+            <map>
+                <entry value-ref="msgListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="${Topic}"/>
+                            <property name="expression" value="*"/>
+                            <!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                <!--更多的订阅添加entry节点即可-->
+            </map>
+        </property>
+    </bean>
+</beans>
