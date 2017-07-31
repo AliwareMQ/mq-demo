@@ -33,5 +33,5 @@
     </bean>
 
     <!-- 消息处理器 -->
-    <bean id="messageListener" class="com.aliyun.openservices.http.example.consumer.MessageListenerImpl"/>
+    <bean id="messageListener" class="com.aliyun.openservices.tcp.example.consumer.MessageListenerImpl"/>
 </beans>

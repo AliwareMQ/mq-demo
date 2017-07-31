@@ -1,6 +1,6 @@
-package com.aliyun.openservices.http.example.producer;
+package com.aliyun.openservices.tcp.example.producer;
 
-import com.aliyun.openservices.http.example.MqConfig;
+import com.aliyun.openservices.tcp.example.MqConfig;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;

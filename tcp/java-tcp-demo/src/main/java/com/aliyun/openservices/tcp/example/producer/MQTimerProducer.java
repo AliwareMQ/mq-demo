@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.aliyun.openservices.http.example.producer;
+package com.aliyun.openservices.tcp.example.producer;
 
-import com.aliyun.openservices.http.example.MqConfig;
+import com.aliyun.openservices.tcp.example.MqConfig;
 import com.aliyun.openservices.ons.api.*;
 
 import java.util.Date;
 import java.util.Properties;
 
 /**
- * MQ发送普通消息示例 Demo
+ * MQ发送定时消息示例 Demo
  */
-public class SimpleMQProducer {
-
-
+public class MQTimerProducer {
     public static void main(String[] args) {
         Properties producerProperties = new Properties();
         producerProperties.setProperty(PropertyKeyConst.ProducerId, MqConfig.PRODUCER_ID);
@@ -38,10 +36,13 @@ public class SimpleMQProducer {
         System.out.println("Producer Started");
 
         for (int i = 0; i < 10; i++) {
-            Message message = new Message(MqConfig.TOPIC, MqConfig.TAG, "mq send transaction message test".getBytes());
+            Message message = new Message(MqConfig.TOPIC, MqConfig.TAG, "mq send timer message test".getBytes());
+            // 延时时间单位为毫秒（ms），指定一个时刻，在这个时刻之后才能被消费，这个例子表示 3秒 后才能被消费
+            long delayTime = 3000;
+            message.setStartDeliverTime(System.currentTimeMillis() + delayTime);
             SendResult sendResult = producer.send(message);
             if (sendResult != null) {
-                System.out.println(new Date() + " Send mq message success! Topic is:" + MqConfig.TOPIC + " msgId is: " + sendResult.getMessageId());
+                System.out.println(new Date() + " Send mq timer message success! Topic is:" + MqConfig.TOPIC + "msgId is: " + sendResult.getMessageId());
             }
         }
     }

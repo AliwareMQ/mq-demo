@@ -1,4 +1,4 @@
-package com.aliyun.openservices.http.example.consumer;
+package com.aliyun.openservices.tcp.example.consumer;
 
 import com.aliyun.openservices.ons.api.bean.ConsumerBean;
 import org.springframework.context.ApplicationContext;
