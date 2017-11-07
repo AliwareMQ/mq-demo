@@ -15,6 +15,7 @@
  */
 package com.aliyun.openservices.tcp.example.producer;
 
+import com.aliyun.openservices.ons.api.exception.ONSClientException;
 import com.aliyun.openservices.tcp.example.MqConfig;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.ONSFactory;
@@ -48,9 +49,13 @@ public class SimpleOrderProducer {
             // 分区顺序消息中区分不同分区的关键字段，sharding key于普通消息的key是完全不同的概念。
             // 全局顺序消息，该字段可以设置为任意非空字符串。
             String shardingKey = String.valueOf(orderId);
-            SendResult sendResult = producer.send(msg, shardingKey);
-            if (sendResult != null) {
+            try {
+                SendResult sendResult = producer.send(msg, shardingKey);
+                assert sendResult != null;
                 System.out.println(new Date() + " Send mq message success! Topic is:" + MqConfig.ORDER_TOPIC + " msgId is: " + sendResult.getMessageId());
+            } catch (ONSClientException e) {
+                System.out.println("发送失败");
+                //出现异常意味着发送失败，为了避免消息丢失，建议缓存该消息然后进行重试。
             }
         }
     }

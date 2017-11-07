@@ -15,9 +15,13 @@
  */
 package com.aliyun.openservices.tcp.example.producer;
 
+import com.aliyun.openservices.ons.api.Message;
+import com.aliyun.openservices.ons.api.ONSFactory;
+import com.aliyun.openservices.ons.api.Producer;
+import com.aliyun.openservices.ons.api.PropertyKeyConst;
+import com.aliyun.openservices.ons.api.SendResult;
+import com.aliyun.openservices.ons.api.exception.ONSClientException;
 import com.aliyun.openservices.tcp.example.MqConfig;
-import com.aliyun.openservices.ons.api.*;
-
 import java.util.Date;
 import java.util.Properties;
 
@@ -39,9 +43,13 @@ public class SimpleMQProducer {
 
         for (int i = 0; i < 10; i++) {
             Message message = new Message(MqConfig.TOPIC, MqConfig.TAG, "mq send transaction message test".getBytes());
-            SendResult sendResult = producer.send(message);
-            if (sendResult != null) {
+            try {
+                SendResult sendResult = producer.send(message);
+                assert sendResult != null;
                 System.out.println(new Date() + " Send mq message success! Topic is:" + MqConfig.TOPIC + " msgId is: " + sendResult.getMessageId());
+            } catch (ONSClientException e) {
+                System.out.println("发送失败");
+                //出现异常意味着发送失败，为了避免消息丢失，建议缓存该消息然后进行重试。
             }
         }
     }
