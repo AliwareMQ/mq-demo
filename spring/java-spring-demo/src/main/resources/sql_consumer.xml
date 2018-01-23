@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="common.xml"/>
+    <bean id="msgListener" class="com.aliyun.openservices.spring.example.normal.DemoMessageListener"/> <!--Listener配置-->
+
+    <bean id="consumer" class="com.aliyun.openservices.ons.api.bean.ConsumerBean" init-method="start"
+          destroy-method="shutdown">
+        <property name="properties"> <!--消费者配置信息-->
+            <props>
+                <prop key="ConsumerId">${ConsumerId}</prop> <!--请替换为自己的账户信息-->
+                <prop key="AccessKey">${AccessKey}</prop>
+                <prop key="SecretKey">${SecretKey}</prop>
+                <!--将消费者线程数固定为50个
+                 <prop key="ConsumeThreadNums">50</prop>
+                -->
+            </props>
+        </property>
+        <property name="subscriptionTable">
+            <map>
+                <entry value-ref="msgListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="xigutest"/>
+                            <!-- 表示需要使用SQL来过滤消息-->
+                            <property name="type" value="SQL92" />
+                            <!-- 需要消息的tag是'TagA'或'TagB'并且自定义属性a(在发送消息的时候通过putUserProperties方法放入)需要在[0,3] -->
+                            <!-- SQL过滤同样可以使用消息的tag作为过滤条件(消息的tag在消息的属性中叫做 TAGS) -->
+                            <!-- SQL过滤同样可以在顺序消费中使用 -->
+                            <property name="expression" value="(TAGS is not null and TAGS in ('TagA', 'TagB')) and (a is not null and a between 0 and 3)" />
+                        </bean>
+                    </key>
+                </entry>
+                <!--更多的订阅添加entry节点即可-->
+            </map>
+        </property>
+    </bean>
+</beans>
