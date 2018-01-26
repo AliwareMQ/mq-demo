@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.aliyun.openservices</groupId>
             <artifactId>ons-client</artifactId>
-            <version>1.7.1.Final</version>
+            <version>1.7.2.Final</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
