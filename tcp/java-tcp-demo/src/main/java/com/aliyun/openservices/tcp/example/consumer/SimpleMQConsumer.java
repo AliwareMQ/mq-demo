@@ -15,12 +15,12 @@
  */
 package com.aliyun.openservices.tcp.example.consumer;
 
-import com.aliyun.openservices.tcp.example.MqConfig;
+import java.util.Properties;
+
 import com.aliyun.openservices.ons.api.Consumer;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
-
-import java.util.Properties;
+import com.aliyun.openservices.tcp.example.MqConfig;
 
 /**
  * MQ 接收消息示例 Demo
@@ -29,10 +29,10 @@ public class SimpleMQConsumer {
 
     public static void main(String[] args) {
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.ConsumerId, MqConfig.CONSUMER_ID);
+        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.CONSUMER_ID);
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
-        consumerProperties.setProperty(PropertyKeyConst.ONSAddr, MqConfig.ONSADDR);
+        consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
         Consumer consumer = ONSFactory.createConsumer(consumerProperties);
         consumer.subscribe(MqConfig.TOPIC, MqConfig.TAG, new MessageListenerImpl());
         consumer.start();

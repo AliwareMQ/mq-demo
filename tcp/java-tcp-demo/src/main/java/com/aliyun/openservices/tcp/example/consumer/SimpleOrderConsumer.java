@@ -15,7 +15,8 @@
  */
 package com.aliyun.openservices.tcp.example.consumer;
 
-import com.aliyun.openservices.tcp.example.MqConfig;
+import java.util.Properties;
+
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
@@ -23,7 +24,7 @@ import com.aliyun.openservices.ons.api.order.ConsumeOrderContext;
 import com.aliyun.openservices.ons.api.order.MessageOrderListener;
 import com.aliyun.openservices.ons.api.order.OrderAction;
 import com.aliyun.openservices.ons.api.order.OrderConsumer;
-import java.util.Properties;
+import com.aliyun.openservices.tcp.example.MqConfig;
 
 /**
  * MQ 接收消息示例 Demo
@@ -32,10 +33,10 @@ public class SimpleOrderConsumer {
 
     public static void main(String[] args) {
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.ConsumerId, MqConfig.ORDER_CONSUMER_ID);
+        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.ORDER_CONSUMER_ID);
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
-        consumerProperties.setProperty(PropertyKeyConst.ONSAddr, MqConfig.ONSADDR);
+        consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
         OrderConsumer consumer = ONSFactory.createOrderedConsumer(consumerProperties);
         consumer.subscribe(MqConfig.ORDER_TOPIC, MqConfig.TAG,  new MessageOrderListener() {
 

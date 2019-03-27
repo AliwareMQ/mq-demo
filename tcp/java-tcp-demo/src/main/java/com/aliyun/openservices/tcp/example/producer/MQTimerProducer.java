@@ -15,11 +15,16 @@
  */
 package com.aliyun.openservices.tcp.example.producer;
 
-import com.aliyun.openservices.tcp.example.MqConfig;
-import com.aliyun.openservices.ons.api.*;
-
 import java.util.Date;
 import java.util.Properties;
+
+import com.aliyun.openservices.ons.api.Message;
+import com.aliyun.openservices.ons.api.ONSFactory;
+import com.aliyun.openservices.ons.api.Producer;
+import com.aliyun.openservices.ons.api.PropertyKeyConst;
+import com.aliyun.openservices.ons.api.SendResult;
+import com.aliyun.openservices.ons.api.exception.ONSClientException;
+import com.aliyun.openservices.tcp.example.MqConfig;
 
 /**
  * MQ发送定时消息示例 Demo
@@ -27,10 +32,10 @@ import java.util.Properties;
 public class MQTimerProducer {
     public static void main(String[] args) {
         Properties producerProperties = new Properties();
-        producerProperties.setProperty(PropertyKeyConst.ProducerId, MqConfig.PRODUCER_ID);
+        producerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.PRODUCER_ID);
         producerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         producerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
-        producerProperties.setProperty(PropertyKeyConst.ONSAddr, MqConfig.ONSADDR);
+        producerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
         Producer producer = ONSFactory.createProducer(producerProperties);
         producer.start();
         System.out.println("Producer Started");
@@ -40,9 +45,14 @@ public class MQTimerProducer {
             // 延时时间单位为毫秒（ms），指定一个时刻，在这个时刻之后才能被消费，这个例子表示 3秒 后才能被消费
             long delayTime = 3000;
             message.setStartDeliverTime(System.currentTimeMillis() + delayTime);
-            SendResult sendResult = producer.send(message);
-            if (sendResult != null) {
+            try {
+                SendResult sendResult = producer.send(message);
+                assert sendResult != null;
                 System.out.println(new Date() + " Send mq timer message success! Topic is:" + MqConfig.TOPIC + "msgId is: " + sendResult.getMessageId());
+            }catch (ONSClientException e){
+                // 消息发送失败，需要进行重试处理，可重新发送这条消息或持久化这条数据进行补偿处理
+                System.out.println(new Date() + " Send mq message failed. Topic is:" + MqConfig.TOPIC);
+                e.printStackTrace();
             }
         }
     }

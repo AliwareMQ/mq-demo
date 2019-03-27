@@ -15,12 +15,12 @@
  */
 package com.aliyun.openservices.tcp.example.consumer;
 
+import java.util.Date;
+
 import com.aliyun.openservices.ons.api.Action;
 import com.aliyun.openservices.ons.api.ConsumeContext;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.MessageListener;
-
-import java.util.Date;
 
 /**
  * MQ消息处理类
@@ -28,8 +28,7 @@ import java.util.Date;
 public class MessageListenerImpl implements MessageListener {
     @Override
     public Action consume(Message message, ConsumeContext consumeContext) {
-        System.out.println(new Date() + " Receive message, Topic is:" +
-                message.getTopic() + ", MsgId is:" + message.getMsgID());
+        System.out.println(new Date() + " Receive message, Topic is:" + message.getTopic() + ", MsgId is:" + message.getMsgID());
         //如果想测试消息重投的功能,可以将Action.CommitMessage 替换成Action.ReconsumeLater
         return Action.CommitMessage;
     }

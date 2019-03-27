@@ -7,6 +7,7 @@ import com.aliyun.openservices.ons.api.MessageListener;
 
 public class DemoMessageListener implements MessageListener {
 
+    @Override
     public Action consume(Message message, ConsumeContext context) {
         System.out.println("Receive: " + message);
         try {

@@ -31,12 +31,10 @@ public class MqConfig {
     public static final String ACCESS_KEY = "XXX";
     public static final String SECRET_KEY = "XXX";
     public static final String TAG = "mq_test_tag";
+
     /**
-     * ONSADDR 请根据不同Region进行配置
-     * 公网测试: http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet
-     * 公有云生产: http://onsaddr-internal.aliyun.com:8080/rocketmq/nsaddr4client-internal
-     * 杭州金融云: http://jbponsaddr-internal.aliyun.com:8080/rocketmq/nsaddr4client-internal
-     * 深圳金融云: http://mq4finance-sz.addr.aliyun.com:8080/rocketmq/nsaddr4client-internal
+     * NAMESRV_ADDR, 请在mq控制台 https://ons.console.aliyun.com 通过"实例管理--获取接入点信息--TCP协议接入点"获取
      */
-    public static final String ONSADDR = "http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet";
+    public static final String NAMESRV_ADDR = "XXX";
+
 }

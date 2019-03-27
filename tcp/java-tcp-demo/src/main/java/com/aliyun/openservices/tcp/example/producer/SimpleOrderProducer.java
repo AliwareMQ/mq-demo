@@ -15,15 +15,16 @@
  */
 package com.aliyun.openservices.tcp.example.producer;
 
-import com.aliyun.openservices.ons.api.exception.ONSClientException;
-import com.aliyun.openservices.tcp.example.MqConfig;
+import java.util.Date;
+import java.util.Properties;
+
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
 import com.aliyun.openservices.ons.api.SendResult;
+import com.aliyun.openservices.ons.api.exception.ONSClientException;
 import com.aliyun.openservices.ons.api.order.OrderProducer;
-import java.util.Date;
-import java.util.Properties;
+import com.aliyun.openservices.tcp.example.MqConfig;
 
 /**
  * MQ发送普通消息示例 Demo
@@ -33,10 +34,10 @@ public class SimpleOrderProducer {
 
     public static void main(String[] args) {
         Properties producerProperties = new Properties();
-        producerProperties.setProperty(PropertyKeyConst.ProducerId, MqConfig.ORDER_PRODUCER_ID);
+        producerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.ORDER_PRODUCER_ID);
         producerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         producerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
-        producerProperties.setProperty(PropertyKeyConst.ONSAddr, MqConfig.ONSADDR);
+        producerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
         OrderProducer producer = ONSFactory.createOrderProducer(producerProperties);
         producer.start();
         System.out.println("Producer Started");
@@ -54,8 +55,9 @@ public class SimpleOrderProducer {
                 assert sendResult != null;
                 System.out.println(new Date() + " Send mq message success! Topic is:" + MqConfig.ORDER_TOPIC + " msgId is: " + sendResult.getMessageId());
             } catch (ONSClientException e) {
-                System.out.println("发送失败");
-                //出现异常意味着发送失败，为了避免消息丢失，建议缓存该消息然后进行重试。
+                // 消息发送失败，需要进行重试处理，可重新发送这条消息或持久化这条数据进行补偿处理
+                System.out.println(new Date() + " Send mq message failed! Topic is:" + MqConfig.TOPIC);
+                e.printStackTrace();
             }
         }
     }

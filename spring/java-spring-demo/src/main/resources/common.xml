@@ -11,9 +11,9 @@
             <props>
                 <prop key="AccessKey">XXX</prop> <!-- 使用前请修改这些资源信息 -->
                 <prop key="SecretKey">XXX</prop>
-                <prop key="ConsumerId">XXX</prop>
-                <prop key="ProducerId">XXX</prop>
+                <prop key="GROUP_ID">XXX</prop>
                 <prop key="Topic">XXX</prop>
+                <prop key="NAMESRV_ADDR">XXX</prop>
             </props>
         </property>
     </bean>

@@ -8,9 +8,10 @@
           destroy-method="shutdown">
         <property name="properties"> <!--生产者配置信息-->
             <props>
-                <prop key="ProducerId">${ProducerId}</prop> <!--请替换为自己的账户信息-->
+                <prop key="GROUP_ID">${GROUP_ID}</prop> <!--请替换为自己的账户信息-->
                 <prop key="AccessKey">${AccessKey}</prop>
                 <prop key="SecretKey">${SecretKey}</prop>
+                <prop key="NAMESRV_ADDR">${NAMESRV_ADDR}</prop>
             </props>
         </property>
     </bean>
