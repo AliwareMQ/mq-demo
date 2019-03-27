@@ -20,7 +20,7 @@ public class SimpleTransactionProducer {
 
     public static void main(String[] args) {
         Properties tranProducerProperties = new Properties();
-        tranProducerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.PRODUCER_ID);
+        tranProducerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.GROUP_ID);
         tranProducerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         tranProducerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
         tranProducerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
