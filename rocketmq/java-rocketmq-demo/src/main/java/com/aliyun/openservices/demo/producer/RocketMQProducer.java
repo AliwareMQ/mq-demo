@@ -39,7 +39,7 @@ public class RocketMQProducer {
          * 如果不想开启消息轨迹，可以按照如下方式创建：
          * DefaultMQProducer producer = new DefaultMQProducer(MqConfig.GROUP_ID, getAclRPCHook());
          */
-        DefaultMQProducer producer = new DefaultMQProducer(MqConfig.ORDER_GROUP_ID, getAclRPCHook(), true, null);
+        DefaultMQProducer producer = new DefaultMQProducer(MqConfig.GROUP_ID, getAclRPCHook(), true, null);
         /**
          * 设置使用接入方式为阿里云，在使用云上消息轨迹的时候，需要设置此项，如果不开启消息轨迹功能，则运行不设置此项.
          */

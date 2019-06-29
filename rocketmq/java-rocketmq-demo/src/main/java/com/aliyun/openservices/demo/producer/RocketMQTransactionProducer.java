@@ -42,6 +42,7 @@ public class RocketMQTransactionProducer {
          * 设置使用接入方式为阿里云，在使用云上消息轨迹的时候，需要设置此项，如果不开启消息轨迹功能，则运行不设置此项.
          */
         transactionMQProducer.setNamesrvAddr(MqConfig.NAMESRV_ADDR);
+        transactionMQProducer.setTransactionCheckListener(new LocalTransactionCheckerImpl());
         transactionMQProducer.start();
 
         for (int i = 0; i < 10; i++) {
@@ -51,6 +52,7 @@ public class RocketMQTransactionProducer {
                     "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
                 SendResult sendResult = transactionMQProducer.sendMessageInTransaction(message, new LocalTransactionExecuter() {
                     @Override public LocalTransactionState executeLocalTransactionBranch(Message msg, Object arg) {
+                        System.out.println("开始执行本地事务： " + msg);
                         return LocalTransactionState.UNKNOW;
                     }
                 }, null);
@@ -59,7 +61,5 @@ public class RocketMQTransactionProducer {
                 e.printStackTrace();
             }
         }
-
-        transactionMQProducer.shutdown();
     }
 }
