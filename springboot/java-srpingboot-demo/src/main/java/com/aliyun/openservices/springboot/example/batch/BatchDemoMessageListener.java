@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BatchDemoMessageListener implements BatchMessageListener{
+public class BatchDemoMessageListener implements BatchMessageListener {
 
     @Override
     public Action consume(final List<Message> messages, final ConsumeContext context) {

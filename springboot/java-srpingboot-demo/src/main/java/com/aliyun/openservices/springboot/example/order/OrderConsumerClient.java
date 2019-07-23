@@ -27,8 +27,6 @@ public class OrderConsumerClient {
         //配置文件
         Properties properties = mqConfig.getMqPropertie();
         properties.setProperty(PropertyKeyConst.GROUP_ID, mqConfig.getOrderGroupId());
-        //将消费者线程数固定为50个
-        properties.setProperty(PropertyKeyConst.ConsumeThreadNums, "50");
         orderConsumerBean.setProperties(properties);
         //订阅关系
         Map<Subscription, MessageOrderListener> subscriptionTable = new HashMap<Subscription, MessageOrderListener>();

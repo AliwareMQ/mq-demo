@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 //正式开发时可以加上 @Configuration 注解，这样服务启动时consumer也启动了
+//sql92只有mq铂金版才支持
 public class SqlConsumerClient {
 
     @Autowired

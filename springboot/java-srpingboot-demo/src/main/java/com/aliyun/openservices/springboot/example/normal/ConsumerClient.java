@@ -27,8 +27,8 @@ public class ConsumerClient {
         //配置文件
         Properties properties = mqConfig.getMqPropertie();
         properties.setProperty(PropertyKeyConst.GROUP_ID, mqConfig.getGroupId());
-        //将消费者线程数固定为50个
-        properties.setProperty(PropertyKeyConst.ConsumeThreadNums, "50");
+        //将消费者线程数固定为20个 20为默认值
+        properties.setProperty(PropertyKeyConst.ConsumeThreadNums, "20");
         consumerBean.setProperties(properties);
         //订阅关系
         Map<Subscription, MessageListener> subscriptionTable = new HashMap<Subscription, MessageListener>();

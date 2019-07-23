@@ -67,8 +67,6 @@ public class AsyncProducerTest {
                 //出现异常意味着发送失败，为了避免消息丢失，建议缓存该消息然后进行重试。
             }
         }
-        producer.shutdown();
-
     }
 
 }
