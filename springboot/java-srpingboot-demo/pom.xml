@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alibaba.ons</groupId>
-    <artifactId>java-srpingboot-demo</artifactId>
+    <artifactId>java-springboot-demo</artifactId>
     <version>1.0</version>
-    <name>java-srpingboot-demo</name>
+    <name>java-springboot-demo</name>
 
     <properties>
         <java.version>1.8</java.version>
