@@ -12,7 +12,7 @@ MQ 的内核为由阿里巴巴集团捐赠给Apache基金会的顶级项目Rocke
 
 ## 如何使用该示例程序
 
-首先请阅读MQ 的文档[快速入门](https://help.aliyun.com/document_detail/34411.html)。
+首先请阅读MQ 的文档[快速入门](https://help.aliyun.com/document_detail/169235.html)。
 
 ## Spring
 
