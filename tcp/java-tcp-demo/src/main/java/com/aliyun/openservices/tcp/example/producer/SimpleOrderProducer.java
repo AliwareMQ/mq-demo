@@ -34,10 +34,10 @@ public class SimpleOrderProducer {
 
     public static void main(String[] args) {
         Properties producerProperties = new Properties();
-        producerProperties.setProperty(PropertyKeyConst.GROUP_ID, MqConfig.ORDER_GROUP_ID);
         producerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         producerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
         producerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
+        //注意！！！如果访问阿里云RocketMQ 5.0系列实例，不要设置PropertyKeyConst.INSTANCE_ID，否则会导致收发失败
         OrderProducer producer = ONSFactory.createOrderProducer(producerProperties);
         producer.start();
         System.out.println("Producer Started");

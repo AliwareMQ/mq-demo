@@ -9,11 +9,15 @@
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
-                <prop key="AccessKey">XXX</prop> <!-- 使用前请修改这些资源信息 -->
-                <prop key="SecretKey">XXX</prop>
+                <prop key="AccessKey">XXX</prop> <!--如果使用当前Demo访问阿里云RocketMQ 4.0系列实例，请设置访问的阿里云账号的AccessKeyId。
+     如果使用当前Demo访问阿里云RocketMQ 5.0系列实例，请设置实例详情页获取的实例用户名，不要设置阿里云账号的AccessKeyId。 -->
+                <prop key="SecretKey">XXX</prop><!--如果使用当前Demo访问阿里云RocketMQ 4.0系列实例，请设置访问的阿里云账号的AccessKeySecret。
+     如果使用当前Demo访问阿里云RocketMQ 5.0系列实例，请设置实例详情页获取的实例密码，不要设置阿里云账号的AccessKeySecret。 -->
                 <prop key="GROUP_ID">XXX</prop>
                 <prop key="Topic">XXX</prop>
-                <prop key="NAMESRV_ADDR">XXX</prop>
+                <prop key="NAMESRV_ADDR">XXX</prop><!-- NAMESRV_ADDR, 通过"实例管理-获取接入点信息-TCP协议接入点"获取。
+ 如果使用当前Demo访问阿里云RocketMQ 4.0系列实例，接入点应该是类似这样的格式  http://MQ_INST_XXX:xxx，注意！！！一定要有http协议头
+ 如果使用当前Demo访问阿里云RocketMQ 5.0系列实例，接入点应该是类似这样的格式  rmq-cn-xxx.xx:xxx，注意！！！一定不要自己添加http协议头 -->
             </props>
         </property>
     </bean>

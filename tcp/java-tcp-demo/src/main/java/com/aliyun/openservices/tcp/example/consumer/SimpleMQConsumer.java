@@ -33,6 +33,7 @@ public class SimpleMQConsumer {
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, MqConfig.ACCESS_KEY);
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, MqConfig.SECRET_KEY);
         consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, MqConfig.NAMESRV_ADDR);
+        //注意！！！如果访问阿里云RocketMQ 5.0系列实例，不要设置PropertyKeyConst.INSTANCE_ID，否则会导致收发失败
         Consumer consumer = ONSFactory.createConsumer(consumerProperties);
         consumer.subscribe(MqConfig.TOPIC, MqConfig.TAG, new MessageListenerImpl());
         consumer.start();
