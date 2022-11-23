@@ -40,6 +40,10 @@ public class RocketMQTransactionProducer {
         TransactionMQProducer transactionMQProducer = new TransactionMQProducer(MqConfig.GROUP_ID, getAclRPCHook());
         transactionMQProducer.setNamesrvAddr(MqConfig.NAMESRV_ADDR);
         transactionMQProducer.setTransactionCheckListener(new LocalTransactionCheckerImpl());
+        /**
+         *设置使用接入方式为阿里云，在使用云上消息轨迹的时候，需要设置此项，如果不开启消息轨迹功能，则运行不设置此项。
+        */
+        transactionMQProducer.setAccessChannel(AccessChannel.CLOUD);
         transactionMQProducer.start();
 
         for (int i = 0; i < 10; i++) {
